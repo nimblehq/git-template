@@ -1,4 +1,4 @@
-https://github.com/nimble/git-template/issues/??
+https://github.com/nimbl3/git-template/issues/??
 
 ## What happened
 
