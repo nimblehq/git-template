@@ -7,7 +7,7 @@ labels: "type : chore"
 
 ## Why
 
-Describe the update details and why it's needed.
+Describe the update in detail and why it is needed.
 
 ## Who Benefits?
 
