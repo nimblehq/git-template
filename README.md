@@ -15,8 +15,12 @@ This project is Copyright (c) 2014 and onwards Nimble. It is free software and m
 [LICENSE]: /LICENSE
 
 ## About
-
-![Nimble](https://assets.nimblehq.co/logo/dark/logo-dark-text-160.png)
+<a href="https://nimblehq.co/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://assets.nimblehq.co/logo/dark/logo-dark-text-160.png">
+    <img alt="Nimble logo" src="https://assets.nimblehq.co/logo/light/logo-light-text-160.png">
+  </picture>    
+</a>
 
 This project is maintained and funded by Nimble.
 
