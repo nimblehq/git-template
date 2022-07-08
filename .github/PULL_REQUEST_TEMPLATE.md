@@ -10,4 +10,4 @@ Describe in detail why this solution is the most appropriate, which solution you
 
 ## Proof Of Work 📹
 
-Show us the implementation: screenshots, GIFs, etc. 
+Show us the implementation: screenshots, GIFs, etc.
