@@ -6,7 +6,7 @@ Provide a description of the **changes** this pull request brings to the codebas
 
 ## Insight 📝~
 
-Describe in detail why this solution is the most appropriate, which solution you tried but did not go with, and how to test the changes. References to relevant documentation is welcome as well.
+Describe in detail why this solution is the most appropriate, which solution you tried but did not go with, and how to test the changes. References to relevant documentation are welcome as well.
 
 ## Proof Of Work 📹
 
