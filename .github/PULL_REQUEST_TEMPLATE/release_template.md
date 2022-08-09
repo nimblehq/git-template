@@ -8,7 +8,7 @@ Provide the ID and title of the issue in the section for each type (feature, cho
 
 - [sc-1234] As a user, I can log in
 or
-- [[sc-1234](https://github.com/nimblehq/git-templates/issues/1234)] As a user, I can log in
+- [[sc-1234](https://app.shortcut.com/nimblehq/story/1234)] As a user, I can log in
 
 ## Chores
 - Same structure as in  ## Feature
