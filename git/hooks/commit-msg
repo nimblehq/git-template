@@ -3,7 +3,7 @@
 #########################[ Prefix commit messages with the story ID ]#########################
 # Get the current branch name, if `sc-ID` or `gh-ID` is present, prefix the commit message
 # e.g. when running `git commit -m 'Commit Message':
-# feature/sc-1234-as-a-user-i-can-sigh-in => [sc-1234] Commit Message
+# feature/sc-1234-as-a-user-i-can-sign-in => [sc-1234] Commit Message
 # feature/gh-1234-as-a-user-i-can-sigh-in => [#1234] Commit Message
 ##############################################################################################
 
@@ -19,7 +19,7 @@ fi
 
 FIRSTLINE=$(head -n1 $1)
 
-# Check if the prefix '[sc-1234]' or '#1234' does NOT exist at the beginning of the first line using grep
+# Check if the prefix '[sc-1234]' or '#1234' does NOT already exist at the beginning of the commit message using grep
 if grep -vqF $PREFIX <<< $FIRSTLINE; then
   echo "$PREFIX $FIRSTLINE" > "$1"
 fi
