@@ -1,4 +1,5 @@
-# For setup instruction, refer to https://github.com/nimblehq/github-actions-workflows/blob/main/.github/workflows/publish_wiki.yml
+# Configuration details can be found here:
+# https://github.com/nimblehq/publish-github-wiki-action
 name: Publish Wiki
 
 on:
@@ -9,11 +10,19 @@ on:
       - develop
 
 jobs:
-  publish:
+  publish_wiki:
     name: Publish Wiki
-    uses: nimblehq/github-actions-workflows/.github/workflows/publish_wiki.yml@0.1.0
-    with:
-      USER_NAME: github-wiki-workflow
-      USER_EMAIL: ${{ secrets.GH_EMAIL }}
-    secrets:
-      USER_TOKEN: ${{ secrets.GH_TOKEN }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Publish Github Wiki
+        uses: nimblehq/publish-github-wiki-action@v1.0
+        with:
+          user_name: bot-nimble
+          user_email: ${{ secrets.GH_EMAIL }}
+          user_access_token: ${{ secrets.GH_TOKEN }}
