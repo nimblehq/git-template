@@ -7,6 +7,8 @@
 # feature/gh-1234-as-a-user-i-can-sigh-in => [#1234] Commit Message
 ##############################################################################################
 
+# using `branch | grep '*'` instead of `git rev-parse --abbrev-ref HEAD` to ensure it works even when the HEAD
+# is not pointing to the branch tip (e.g. during interactive rebasing)
 BRANCH_NAME="$(git branch | grep '*' | grep -E 'sc-\d+|gh-\d+' -o)"
 
 # Check if the branch name starts with 'sc-' followed by one or more digits using =~
