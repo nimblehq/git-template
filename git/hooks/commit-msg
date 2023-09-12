@@ -23,5 +23,12 @@ FIRSTLINE=$(head -n1 $1)
 
 # Check if the prefix '[sc-1234]' or '#1234' does NOT already exist at the beginning of the commit message using grep
 if grep -vqF $PREFIX <<< $FIRSTLINE; then
-  echo "$PREFIX $FIRSTLINE" > "$1"
+  # The -i option (edit in-place) behaves differently on OSX and Linux
+  # To not create backup file:
+  # OSX: sed -i '' expression file
+  # Linux: sed -i expression file
+  # See: https://unix.stackexchange.com/questions/13711/differences-between-sed-on-mac-osx-and-other-standard-sed/131940#131940:~:text=%2Di%20%27%27%20works,to%20sed).
+  # This is a work-around for that
+  PATCHED=$(sed "1 s/^.*$/$PREFIX $FIRSTLINE/" "$1")
+  echo "$PATCHED" > "$1"
 fi
