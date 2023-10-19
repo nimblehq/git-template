@@ -9,14 +9,18 @@
 
 # using `branch | grep '*'` instead of `git rev-parse --abbrev-ref HEAD` to ensure it works even when the HEAD
 # is not pointing to the branch tip (e.g. during interactive rebasing)
-BRANCH_NAME="$(git branch | grep '*' | grep -E 'sc-\d+|gh-\d+' -o)"
+BRANCH_NAME="$(git branch | grep '*' | grep -E 'gh-\d+|(\w+)-\d+' -o)"
 
 # Check if the branch name starts with 'sc-' followed by one or more digits using =~
-if [[ $BRANCH_NAME =~ ^sc-([0-9]+) ]]; then
-  PREFIX="[${BASH_REMATCH[0]}]"
-else
+if [[ $BRANCH_NAME =~ ^gh-([0-9]+) ]]; then
   # Extract only the digits after 'gh-' using parameter expansion
   PREFIX="[#${BRANCH_NAME##gh-}]"
+elif [[ $BRANCH_NAME =~ ^.+-([0-9]+) ]]; then
+  # Keep the story ID
+  PREFIX="[${BASH_REMATCH[0]}]"
+else
+  # No sc- or gh- prefix, do nothing
+  exit 0
 fi
 
 FIRSTLINE=$(head -n1 $1)
