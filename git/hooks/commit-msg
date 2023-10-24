@@ -1,27 +1,48 @@
 #!/bin/sh
 
 #########################[ Prefix commit messages with the story ID ]#########################
-# Get the current branch name, if `sc-ID` or `gh-ID` is present, prefix the commit message
-# e.g. when running `git commit -m 'Commit Message':
-# feature/sc-1234-as-a-user-i-can-sign-in => [sc-1234] Commit Message
-# feature/gh-1234-as-a-user-i-can-sigh-in => [#1234] Commit Message
+# This shell script is designed to automatically prefix Git commit messages with a story ID.
+# It extracts the story ID from the current branch name, which should be in one of the following formats:
+# - 'feature/sc-1234-as-a-user-i-can-sign-in' (Prefix: '[sc-1234]')
+# - 'feature/any-1234-as-a-user-i-can-sign-in' (Prefix: '[any-1234]')
+# - 'feature/gh-1234-as-a-user-i-can-sigh-in' (Prefix: '[#1234]')
+#
+# The script follows these steps:
+# 1. Get the current branch name and extract the story ID using regular expressions.
+# 2. Check if the branch name starts with 'gh-' followed by one or more digits or any other prefix
+#    followed by one or more digits, capturing the story ID.
+# 3. If a story ID is found, it creates a prefix like '[any-1234]' or '[#1234]'.
+#    GitHub uses the prefix '[#1234]' to link commits to specific stories or issues, so `#` is used instead of `gh-`.
+# 4. Check if the commit message already has the same prefix; if not, add it to the first line of the message.
+# 5. Save the updated commit message back to the file.
+#
+# Example Usage:
+# - Before running: `git commit -m 'Fix a bug'`
+# - After running on 'feature/any-1234-fix-bug-branch': `git commit -m '[any-1234] Fix a bug'`
+# - After running on 'feature/gh-1234-fix-bug-branch': `git commit -m '[#1234] Fix a bug'`
+#
+# This script ensures consistency in commit messages and helps link commits to specific stories or issues.
 ##############################################################################################
 
 # using `branch | grep '*'` instead of `git rev-parse --abbrev-ref HEAD` to ensure it works even when the HEAD
 # is not pointing to the branch tip (e.g. during interactive rebasing)
-BRANCH_NAME="$(git branch | grep '*' | grep -E 'sc-\d+|gh-\d+' -o)"
+STORY_ID="$(git branch | grep '*' | grep -E 'gh-\d+|(\w+)-\d+' -o)"
 
-# Check if the branch name starts with 'sc-' followed by one or more digits using =~
-if [[ $BRANCH_NAME =~ ^sc-([0-9]+) ]]; then
+# Check if the story ID starts with 'gh-' followed by one or more digits
+if [[ $STORY_ID =~ ^gh-([0-9]+) ]]; then
+  # Change the prefix to '[#1234]'
+  PREFIX="[#${STORY_ID##gh-}]"
+
+# Check if the story ID starts with any other prefix followed by one or more digits
+elif [[ $STORY_ID =~ ^.+-([0-9]+) ]]; then
+  # Use the story ID as-is, e.g., '[any-1234]', '[sc-1234]',
   PREFIX="[${BASH_REMATCH[0]}]"
-else
-  # Extract only the digits after 'gh-' using parameter expansion
-  PREFIX="[#${BRANCH_NAME##gh-}]"
 fi
 
+# Get the first line of the commit message
 FIRSTLINE=$(head -n1 $1)
 
-# Check if the prefix '[sc-1234]' or '#1234' does NOT already exist at the beginning of the commit message using grep
+# Check if the prefix '[any-1234]' or '#1234' does NOT already exist at the beginning of the commit message using grep
 if grep -vqF $PREFIX <<< $FIRSTLINE; then
   # The -i option (edit in-place) behaves differently on OSX and Linux
   # To not create backup file:
