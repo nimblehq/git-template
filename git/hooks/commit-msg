@@ -50,6 +50,6 @@ if grep -vqF $PREFIX <<< $FIRSTLINE; then
   # Linux: sed -i expression file
   # See: https://unix.stackexchange.com/questions/13711/differences-between-sed-on-mac-osx-and-other-standard-sed/131940#131940:~:text=%2Di%20%27%27%20works,to%20sed).
   # This is a work-around for that
-  PATCHED=$(sed "1 s/^.*$/$PREFIX $FIRSTLINE/" "$1")
+  PATCHED=$(sed "1 s/^/$PREFIX /" "$1")
   echo "$PATCHED" > "$1"
 fi
