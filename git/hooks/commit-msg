@@ -26,7 +26,7 @@
 
 # using `branch | grep '*'` instead of `git rev-parse --abbrev-ref HEAD` to ensure it works even when the HEAD
 # is not pointing to the branch tip (e.g. during interactive rebasing)
-SHORT_BRANCH_NAME="$(git branch | grep '*' | grep -E '\/(gh-\d+|(\w+)-\d+)' -o)"
+SHORT_BRANCH_NAME="$(git branch | grep '*' | grep -E '\/(gh-\d+|(\w+)-\d+)' -o | head -1)"
 
 # Extract the story ID from the branch name
 STORY_ID=${SHORT_BRANCH_NAME##*/}
