@@ -10,7 +10,7 @@ labels: "type: feature"
 
 (Optional) What it will solve or what value it delivers to end-users.
 
-### Acceptance Criteria
+## Acceptance Criteria
 
 List down how the feature must work and what criteria are necessary for the user story to be accepted.
 
