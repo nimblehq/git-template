@@ -11,7 +11,9 @@ or
 - [[sc-1234](https://app.shortcut.com/nimblehq/story/1234)] As a user, I can log in
 
 ## Chores
+
 - Same structure as in  ## Feature
 
 ## Bugs
+
 - Same structure as in  ## Feature
