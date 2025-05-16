@@ -1,14 +1,19 @@
+<!-- https://nimblehq.co/compass/product/backlog-management/user-stories/chores/ -->
 ---
 name: "Chore"
-about: "Open a chore issue for a minor update."
+about: "Open an issue that may not directly add business value to the product but still require effort to do."
 title: "Update "
-labels: "type : chore"
+labels: "type: chore"
 ---
 
 ## Why
 
-Describe the update in detail and why it is needed.
+Describe the purpose of the chore.
 
-## Who Benefits?
+## Acceptance Criteria
 
-Describe who will be the beneficiaries e.g. everyone, specific chapters, clients...
+List down what is being accomplished in the chore and what the QA should test to consider the chore as completed.
+
+## Resources
+
+List any resources needed in accomplishing the chore.
